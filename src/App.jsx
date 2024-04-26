@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Scoreboard from "./components/Scoreboard";
-//import { fetchCharacters } from "./data";
 import "./App.css";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -48,7 +47,6 @@ function App() {
       }
     };
     fetchPosts();
-    console.log(pokemons);
 
     return () => {
       pokemons = [];
@@ -56,11 +54,6 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   randomizePokemon();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [deck]);
 
   function initIdArray() {
     while (pokemonIDs.length < 12) {
@@ -96,7 +89,6 @@ function App() {
         }
       }
     });
-    console.log(pokemons);
     randomizePokemon();
   }
 
@@ -131,11 +123,6 @@ function App() {
         setHighScore={setHighScore}
       />
       <div className="grid">
-        {/* {pokemons.map((pokemon) => {
-          return (
-            <Card key={pokemon.name} name={pokemon.name} url={pokemon.url} />
-          );
-        })} */}
         {deck.map((pokemon) => {
           return (
             <div
@@ -147,8 +134,6 @@ function App() {
           );
         })}
       </div>
-      <button onClick={randomizePokemon}>randomize</button>
-      <button onClick={() => setDeck(() => [])}>hi</button>
     </div>
   );
 }
