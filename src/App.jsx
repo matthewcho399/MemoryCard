@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Scoreboard from "./components/Scoreboard";
-import "./App.css";
+import ".//styles/App.css";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 let pokemons = [];
@@ -116,12 +116,22 @@ function App() {
 
   return (
     <div>
-      <Scoreboard
-        currentScore={currentScore}
-        setCurrentScore={setCurrentScore}
-        highScore={highScore}
-        setHighScore={setHighScore}
-      />
+      <div className="header">
+        <div>
+          <h1>Pokemon Card Memory Game</h1>
+          <p>
+            Get points by clicking a card, but do not click on one more than
+            once.
+          </p>
+        </div>
+        <Scoreboard
+          currentScore={currentScore}
+          setCurrentScore={setCurrentScore}
+          highScore={highScore}
+          setHighScore={setHighScore}
+        />
+      </div>
+
       <div className="grid">
         {deck.map((pokemon) => {
           return (
