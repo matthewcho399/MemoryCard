@@ -11,6 +11,7 @@ class Pokemon {
   constructor(name, url) {
     this.name = name;
     this.url = url;
+    this.clicked = false;
   }
 }
 
@@ -86,6 +87,37 @@ function App() {
     setDeck(randomizedDeck);
   }
 
+  function handleCardClick(name) {
+    pokemons.find((pokemon) => {
+      if (pokemon.name === name) {
+        handleScore(pokemon.clicked);
+        if (pokemon.clicked === false) {
+          return (pokemon.clicked = true);
+        }
+      }
+    });
+    console.log(pokemons);
+    randomizePokemon();
+  }
+
+  function handleScore(clicked) {
+    if (clicked === false) {
+      setCurrentScore((score) => score + 1);
+    } else {
+      if (currentScore > highScore) {
+        setHighScore(currentScore);
+      }
+      setCurrentScore(0);
+      resetDeck();
+    }
+  }
+
+  function resetDeck() {
+    pokemons.forEach((pokemon) => {
+      pokemon.clicked = false;
+    });
+  }
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -106,7 +138,12 @@ function App() {
         })} */}
         {deck.map((pokemon) => {
           return (
-            <Card key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+            <div
+              key={pokemon.name}
+              onClick={() => handleCardClick(pokemon.name)}
+            >
+              <Card key={pokemon.name} name={pokemon.name} url={pokemon.url} />
+            </div>
           );
         })}
       </div>
